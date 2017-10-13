@@ -22,7 +22,7 @@
       var strId = "dljs-"+ Date.now();
       this.el = document.createElement('ul');
       this.el.setAttribute("id", strId );
-      this.el.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0;"  );
+      this.el.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
       document.body.appendChild(this.el);
 
     } else {
@@ -55,7 +55,7 @@
   dljs.utils = {};
 
   dljs.utils.getDistance = function(x1,y1,x2,y2){
-    return 0
+    return Math.sqr( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) )
   };
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
