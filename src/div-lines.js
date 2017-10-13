@@ -6,7 +6,6 @@
  * @author Andres J. Soria R. <ajsoriar@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
-
 (function() {
 
   window.dljs = {
@@ -61,6 +60,26 @@
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
     return (y2-y1)/(x2-x1)
+  };
+
+  dljs.rm = function(lineID){ // Remove line
+
+  };
+
+  dljs.update = function(id, propsArr ){
+
+  };
+
+  dljs.trace = function(arr){
+
+  };
+
+  dljs.createContext = function() {
+
+  };
+
+  dljs.utils.getRandomNum = function(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
   };
 
   dljs.utils.rndColor = function() {
