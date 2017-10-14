@@ -33,16 +33,17 @@
     return this
   };
 
-  dljs.line = function (x1,y1,x2,y2,color) {
+  dljs.line = function (x1,y1,x2,y2,thickness,color) {
     if (!this.el) this.init();
     if (color === "RANDOM") color = this.utils.getRandomColor();
     if (color === null) color = "#000";
-    var new_content = dljs.getLineString(null,x1,y1,x2,y2, 2, color, 1, false, 0, null);
+    if (thickness === null) thickness = 2;
+    var new_content = dljs.getLineString(null,x1,y1,x2,y2, thickness, color, 1, false, 0, null);
     this.draw( new_content );
     return this.el.lastElementChild
   };
 
-  dljs.linex = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){ // extended
+  dljs.linex = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){ // extended functionality
     if (!this.el) this.init();
     if (color === "RANDOM") color = this.utils.getRandomColor();
     if (color === null) color = "#000";
@@ -64,7 +65,7 @@
   dljs.utils = {};
 
   dljs.utils.getDistance = function(x1,y1,x2,y2){
-    return Math.sqr( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) )
+    return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) )
   };
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
@@ -110,13 +111,10 @@
   // This function returns an html string
   dljs.getLineString = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){
 
-      if (x2 < x1){
-          var aux_x = x1; x1 = x2; x2 = aux_x;
-          var aux_y = y1; y1 = y2; y2 = aux_y;
-      }
+      if (x2 < x1){ var aux = x1; x1 = x2; x2 = aux; aux = y1; y1 = y2; y2 = aux; }
 
       if ( idString === null ) idString = "line-"+ Date.now();
-      var cathetus1 = x2-x1
+      var cathetus1 = x2-x1;
       var cathetus2 = y2-y1;
       var hypotenuse = Math.sqrt(cathetus1*cathetus1+cathetus2*cathetus2);
       var w=hypotenuse + weight;
@@ -125,6 +123,25 @@
 
       //var string = '<div id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></div>';
       var string = '<li id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></li>';
+
+      return string;
+  };
+
+  dljs.CONST_180_BY_PI = 180 / Math.PI;
+
+  dljs.getFastLineString = function (x1,y1,x2,y2,weight,color){
+
+      if (x2 < x1){ var aux = x1; x1 = x2; x2 = aux; aux = y1; y1 = y2; y2 = aux; }
+
+      var cathetus1 = x2-x1
+          cathetus2 = y2-y1,
+          hypotenuse = Math.sqrt(cathetus1*cathetus1+cathetus2*cathetus2),
+          w = hypotenuse + weight,
+          angRadians = Math.asin(cathetus2/hypotenuse),
+          ang = angRadians * dljs.CONST_180_BY_PI;
+
+      //var string = '<div id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></div>';
+      var string = '<li class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+';"></li>';
 
       return string;
   };
