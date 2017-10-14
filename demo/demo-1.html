@@ -1,15 +1,14 @@
 <!DOCTYPE html>
     <head>
-    <title>div-lines.js</title>
-    <style type="text/css">
+        <title>line(x,y)</title>
+        <style type="text/css">
 
-        body {
-            overflow: hidden;
-            /* background-image: url("bg-005.gif"); */
-            background-color: black
-        }
+            body {
+                overflow: hidden;
+                background-image: url("bg-005.gif");
+            }
 
-    </style>
+        </style>
     </head>
 
     <body>
@@ -17,9 +16,23 @@
             <div id="line" class="line extra"></div>
         </div>
         <script src="../dist/div-lines.min.js"></script>
-        <script >
-            for (var i = 0; i < 100; i++) { dljs.rndLine(); }
+        <!-- <script src="../src/div-lines.js"></script> -->
+        <script>
+            // (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra);
+            dljs.linex(null,0  ,0  ,50 ,50 , 1, "#ff0000",0.8, true, 5, "#ff00ff"); 
+            dljs.linex(null,50 ,50 ,100,50 , 1, "#ff0000",0.8, true, 5, "#ff00ff");
+            dljs.linex(null,100,50 ,150,0  , 1, "#ff0000",0.8, true, 5, "#ff00ff");
+            dljs.linex(null,150,0  ,250,100, 1, "#ff0000",0.8, true, 5, "#ff00ff");
+            dljs.linex(null,250,100,250,200, 1, "#ff0000",0.8, true, 5, "#ff00ff");
+            dljs.linex(null,250,200,300,200, 1, "#ff0000",0.8, true, 5, "#ff00ff");
+            dljs.linex(null,300,200,300,50 , 1, "#ff0000",0.8, true, 5, "#ff00ff" );
+            dljs.linex(null,300,50 ,250,0  , 1, "#ff0000",0.8, true, 5, "#ff00ff" );
+            dljs.linex(null,250,0  ,200,50 , 1, "#ff0000",0.8, true, 5, "#ff00ff" );
+            dljs.linex(null,100,100,400,300,10);
+            dljs.linex(null,400,300,400,0  ,20,"#0000ff",0.5);
+            dljs.linex(null,500,100,600,200,20,"#00ff00",0.5);
+            dljs.linex(null,50 ,50 ,600,200,40,"#ffff00",0.5,true,10,"#00ffff");
         </script>
-    </body>
 
+    </body>
 </html>
