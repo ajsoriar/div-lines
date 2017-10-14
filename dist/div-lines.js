@@ -42,6 +42,15 @@
     return this.el.lastElementChild
   };
 
+  dljs.linex = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){ // extended
+    if (!this.el) this.init();
+    if (color === "RANDOM") color = this.utils.getRandomColor();
+    if (color === null) color = "#000";
+    var new_content = dljs.getLineString(idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra);
+    this.draw( new_content );
+    return this.el.lastElementChild
+  };
+
   dljs.rndLine = function(){
     var u = this.utils;
     this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), u.rndColor() );
