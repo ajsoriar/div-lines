@@ -16,7 +16,7 @@ Small and simple utility library to draw lines just using javascript and HTML Do
  - NPM: **npm install div-lines**
  - NuGet: **PM> Install-Package div-lines**
  - github: **https://github.com/ajsoriar/div-lines**
- - yarn: **https://github.com/ajsoriar/div-lines**
+ - yarn: **yarn add div-lines**
 
 #### 2 Include dependences: 
 2.1 div-lines.js or div-lines.min.js are under dist folder.
