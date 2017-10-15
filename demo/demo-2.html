@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <head>
+    <title>div-lines.js</title>
+    <style type="text/css">
+
+        body {
+            overflow: hidden;
+            /* background-image: url("bg-005.gif"); */
+            background-color: black;
+            width: 100vw;
+            height: 100vh;
+        }
+
+    </style>
+    </head>
+
+    <body>
+        <div id="mainContainer" class="mainContainer">
+            <div id="line" class="line extra"></div>
+        </div>
+        <script src="../dist/div-lines.min.js"></script>
+        <!-- <script src="../src/div-lines.js"></script> -->
+        <script >
+
+            var NUM_OF_LINES = 200;
+            var u = dljs.utils;
+            var str = '';
+
+            var container = dljs.init();
+
+            // Slow!
+
+            /*
+            var animate = function(time)  {
+                container.el.innerHTML="";
+                for (var i = 0; i < NUM_OF_LINES; i++) { 
+                    dljs.rndLine(); 
+                }
+                window.requestAnimationFrame( animate );
+            };
+            window.requestAnimationFrame( animate );
+            */
+
+            // Fast!
+
+            // dljs.getFastLineString = function (x1,y1,x2,y2,weight,color){
+            var animate = function(time)  {
+                var str = '';
+                for (var i = 0; i < NUM_OF_LINES; i++) { 
+                    str+=dljs.getFastLineString( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 2, u.rndColor() );
+                }
+                container.el.innerHTML=str;
+                window.requestAnimationFrame( animate );
+            };
+            window.requestAnimationFrame( animate );
+           
+
+        </script>
+    </body>
+
+</html>
