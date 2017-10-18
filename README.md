@@ -8,6 +8,8 @@ Small and simple utility library to draw lines just using javascript and HTML Do
 
 ![div-lines demo 1](./docs/div-lines-1.jpg?raw=true "div-lines demo 1")
 
+This example in plunker: http://embed.plnkr.co/Nipx831rhNMFnTiVUWTN/
+
 ## Quick start. 
 
 #### 1 Download and Install div-lines:
@@ -34,7 +36,12 @@ dljs.line(null,100,100,400,300,10);
 A couple of examples:
 ![div-lines demo 2](./docs/div-lines-3.jpg?raw=true "div-lines demo 2")
 
+This example in plunker: http://embed.plnkr.co/fN5Elp/
+
 ![div-lines demo 3](./docs/div-lines-4.jpg?raw=true "div-lines demo 3")
+
+This example in plunker: http://embed.plnkr.co/PGwarf/
+
 
 #### 4 License
 
