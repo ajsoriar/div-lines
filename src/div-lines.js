@@ -12,6 +12,32 @@
     "el": null
   };
 
+  /*
+
+  dljs.previous = {
+    x1: null,
+    y1: null,
+    x2: null,
+    y2: null,
+    weight: null,
+    color: null,
+    opacity: null,
+    roundBorder: null,
+    longSombra: null, 
+    colSombra: null
+  };
+  
+  dljs.stickyLine = function() {
+    
+  };
+
+  dljs.lineTo = function(x1,y1,x2,y2,thickness,color) {
+    // get last x y
+
+  };
+
+  */
+
   dljs.init = function ( el ) {
 
     console.log("dljs.init()");
