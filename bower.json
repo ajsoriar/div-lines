@@ -1,11 +1,13 @@
 {
   "name": "div-lines",
+  "version": "1.0.0",
+  "homepage": "https://github.com/ajsoriar/div-lines.git",
   "description": "Small and simple utility library to draw lines just using javascript and HTML Document Object Model. No JQuery needed",
   "main": "dist/div-lines.min.js",
   "authors": [
     "Andres J. Soria R. <<ajsoriar@gmail.com>"
   ],
-  "license": "MIT",
+  "moduleType": [],
   "keywords": [
     "js-lines",
     "div-lines",
@@ -14,7 +16,11 @@
     "jslines",
     "lines.js"
   ],
-  "homepage": "",
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
