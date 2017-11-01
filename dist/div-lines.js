@@ -1,16 +1,43 @@
 /**
  * div-lines
  * Small and simple utility library to draw lines just using javascript and HTML Document Object Model. No JQuery needed.
- * @version v0.0.1 - 2017-10-12
+ * @version v1.0.1 - 2017-11-01
  * @link https://github.com/ajsoriar/div-lines
  * @author Andres J. Soria R. <ajsoriar@gmail.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
+ 
 (function() {
 
   window.dljs = {
     "el": null
   };
+
+  /*
+
+  dljs.previous = {
+    x1: null,
+    y1: null,
+    x2: null,
+    y2: null,
+    weight: null,
+    color: null,
+    opacity: null,
+    roundBorder: null,
+    longSombra: null, 
+    colSombra: null
+  };
+  
+  dljs.stickyLine = function() {
+    
+  };
+
+  dljs.lineTo = function(x1,y1,x2,y2,thickness,color) {
+    // get last x y
+
+  };
+
+  */
 
   dljs.init = function ( el ) {
 

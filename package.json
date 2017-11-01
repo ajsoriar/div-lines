@@ -1,6 +1,6 @@
 {
   "name": "div-lines",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Small and simple utility library to draw lines just using javascript and HTML Document Object Model. No JQuery needed",
   "main": "dist/div-lines.min.js",
   "directories": {
