@@ -81,7 +81,7 @@
 
   dljs.rndLine = function(){
     var u = this.utils;
-    this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), u.rndColor() );
+    this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 1,  u.rndColor() );
     return this.el.lastElementChild
   };
 
