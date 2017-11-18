@@ -10,7 +10,11 @@
 (function() {
 
   window.dljs = {
-    "el": null
+    "el": null,
+    "pointer":{
+      x:0,
+      y:0
+    }
   };
 
   /*
@@ -67,6 +71,7 @@
     if (thickness === null) thickness = 2;
     var new_content = dljs.getLineString(null,x1,y1,x2,y2, thickness, color, 1, false, 0, null);
     this.draw( new_content );
+    this.goTo(x2,y2);
     return this.el.lastElementChild
   };
 
@@ -76,17 +81,29 @@
     if (color === null) color = "#000";
     var new_content = dljs.getLineString(idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra);
     this.draw( new_content );
+    this.goTo(x2,y2);
     return this.el.lastElementChild
   };
 
   dljs.rndLine = function(){
     var u = this.utils;
-    this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), u.rndColor() );
+    this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 1,  u.rndColor() );
     return this.el.lastElementChild
   };
 
   dljs.draw = function(html){ // Draw html content
     this.el.innerHTML = this.el.innerHTML + html; //previous_html_lines + new_content;
+  };
+
+  dljs.goTo = function(x,y){
+    this.pointer.x = x;
+    this.pointer.y = y;
+  };
+
+  dljs.lineTo = function(x2,y2,thickness,color) {
+    var x1 = this.pointer.x;
+    var y1 = this.pointer.y;
+    this.line(x1,y1,x2,y2,thickness,color);
   };
 
   dljs.utils = {};
