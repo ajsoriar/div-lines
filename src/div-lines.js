@@ -101,6 +101,42 @@
     this.line(x1,y1,x2,y2,thickness,color);
   };
 
+  dljs.rmLine = function(lineID){ // Remove line
+
+  };
+
+  dljs.updateLine = function(id, propsArr ){
+
+  };
+
+  dljs.trace = function(arr){
+
+  };
+
+  /* ------ */
+  /* Boards */
+  /* ------ */
+
+  dljs.createBoard = function() {
+
+  };
+
+  dljs.getBoards = function() {
+
+  };
+
+  dljs.setBoard = function() {
+
+  };
+
+  dljs.rmBoard = function() {
+
+  };
+
+  /* ----- */
+  /* Utils */
+  /* ----- */
+
   dljs.utils = {};
 
   dljs.utils.getDistance = function(x1,y1,x2,y2){
@@ -109,22 +145,6 @@
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
     return (y2-y1)/(x2-x1)
-  };
-
-  dljs.rm = function(lineID){ // Remove line
-
-  };
-
-  dljs.update = function(id, propsArr ){
-
-  };
-
-  dljs.trace = function(arr){
-
-  };
-
-  dljs.createContext = function() {
-
   };
 
   dljs.utils.getRandomNum = function(min, max) {
@@ -147,6 +167,12 @@
       return this.getRandomNum(1, window.innerHeight );
   };
 
+  /* -------------- */
+  /* Core functions */
+  /* -------------- */
+
+  dljs.CONST_180_BY_PI = 180 / Math.PI;
+
   // This function returns an html string
   dljs.getLineString = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){
 
@@ -165,8 +191,6 @@
 
       return string;
   };
-
-  dljs.CONST_180_BY_PI = 180 / Math.PI;
 
   dljs.getFastLineString = function (x1,y1,x2,y2,weight,color){
 
