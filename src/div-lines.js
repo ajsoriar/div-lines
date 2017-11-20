@@ -9,13 +9,16 @@
  
 (function() {
 
-  window.dljs = {
-    "el": null,
-    "pointer":{
-      x:0,
-      y:0
-    }
-  };
+    "use strict";
+
+    window.dljs = {
+      "el": null,
+      "boards":[],
+      "pointer":{
+        x:0,
+        y:0
+      }
+    };
 
   /*
 
@@ -45,11 +48,16 @@
     if (!el){
 
       // create
+
+      /*
       var strId = "dljs-"+ Date.now();
       this.el = document.createElement('ul');
       this.el.setAttribute("id", strId );
       this.el.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
       document.body.appendChild(this.el);
+      */
+
+      this.createBoard();
 
     } else {
 
@@ -113,25 +121,103 @@
 
   };
 
-  /* ------ */
-  /* Boards */
-  /* ------ */
+    /* ------ */
+    /* Boards */
+    /* ------ */
 
-  dljs.createBoard = function() {
+    dljs.createBoard = function( boardId, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
 
-  };
+        // (1) name of the new board
+        if ( boardId === undefined || boardId === null ) boardId = "dljs-"+ Date.now();
 
-  dljs.getBoards = function() {
+        // (2) set board properties
 
-  };
+        if ( objOptions != null ) {
 
-  dljs.setBoard = function() {
+            // Overwrite default board values
 
-  };
+        } else {
 
-  dljs.rmBoard = function() {
+            var brd = document.createElement('ul');
+            brd.setAttribute("id", boardId );
 
-  };
+            // Create a board seting default values
+            brd.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
+        }
+
+        // (3) add board to arr of boards
+        dljs.boards.push( brd );
+
+        // (4) Atach board to DOM
+        document.body.appendChild( brd );
+
+        // (5) Set this new board as the active one
+        //this.el = [ dljs.boards[ dljs.boards.length -1 ] ];
+        this.el = brd;
+
+        return brd
+    };
+
+    dljs.getBoards = function() {
+        return dljs.boards
+    };
+
+    dljs.setBoard = function( boardID ) {
+        if ( boardID === undefined || boardID === null ) {
+            this.el = dljs.boards[0];
+            return this.el
+        } else {
+
+
+            if( isNaN( boardID ) ){
+                // search board name
+                for (var i=0; i < dljs.boards.length; i++ ) {
+                    if ( boardID === dljs.boards[i].id ) {
+                        this.el = dljs.boards[i];
+                    } 
+                }
+
+                return this.el
+
+            } else {
+
+                if ( boardID > dljs.boards.length -1 ) return false
+
+                this.el = dljs.boards[ boardID ];
+
+                return this.el
+            }
+
+        }
+        return false
+    };
+
+    dljs.rmBoard = function( boardId_or_number ) {
+
+       /*
+
+        if ( boardId_or_number is numeric ) {
+
+            // remove here
+
+            return true
+
+        } else {
+
+          for (var i=0; i < dljs.boards.length; i++ ) {
+              if ( boardId === dljs.boards[i].id ) {
+                  
+                  // remove here
+
+                  return true
+              }
+          }
+        }
+
+        return false
+
+        */
+    };
 
   /* ----- */
   /* Utils */
