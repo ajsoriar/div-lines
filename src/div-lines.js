@@ -125,10 +125,10 @@
     /* Boards */
     /* ------ */
 
-    dljs.createBoard = function( boardId, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
+    dljs.createBoard = function( boardID, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
 
         // (1) name of the new board
-        if ( boardId === undefined || boardId === null ) boardId = "dljs-"+ Date.now();
+        if ( boardID === undefined || boardID === null ) boardID = "dljs-"+ Date.now();
 
         // (2) set board properties
 
@@ -139,9 +139,9 @@
         } else {
 
             var brd = document.createElement('ul');
-            brd.setAttribute("id", boardId );
+            brd.setAttribute("id", boardID );
 
-            // Create a board seting default values
+            // Create a board setting default values
             brd.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
         }
 
@@ -168,55 +168,72 @@
             return this.el
         } else {
 
-
             if( isNaN( boardID ) ){
-                // search board name
+
                 for (var i=0; i < dljs.boards.length; i++ ) {
                     if ( boardID === dljs.boards[i].id ) {
                         this.el = dljs.boards[i];
                     } 
                 }
-
                 return this.el
 
             } else {
 
                 if ( boardID > dljs.boards.length -1 ) return false
-
                 this.el = dljs.boards[ boardID ];
-
                 return this.el
             }
-
         }
+
         return false
     };
 
-    dljs.rmBoard = function( boardId_or_number ) {
+    dljs.rmBoard = function( boardID ) {
 
-       /*
+        var selectedID = null;
+        var index = null;
 
-        if ( boardId_or_number is numeric ) {
+        // Find the element that should be removed
 
-            // remove here
-
-            return true
+        if( isNaN( boardID ) ){
+            // search board name
+            for (var i=0; i < dljs.boards.length; i++ ) {
+              
+                if ( boardID === dljs.boards[i].id ) {
+                    selectedID = dljs.boards[i].id;
+                    index = i;
+                } 
+            }
 
         } else {
 
-          for (var i=0; i < dljs.boards.length; i++ ) {
-              if ( boardId === dljs.boards[i].id ) {
-                  
-                  // remove here
-
-                  return true
-              }
-          }
+            if ( boardID > dljs.boards.length -1 ) return false
+            selectedID = dljs.boards[ boardID ].id;
+            index = boardID;
         }
 
-        return false
+        // Remove element from html and references in variables 
 
-        */
+        if ( selectedID != null ) {
+
+            var node = document.getElementById( selectedID );
+            if (node.parentNode) {
+                
+                // remove html
+                node.parentNode.removeChild(node);
+
+                // remove from the array of boards or the element will remain in memory
+                dljs.boards.splice( index, 1 )
+                
+                // remove from dljs.el or the element will remain in memory
+                if ( dljs.boards.length != 0 ){
+                    dljs.el = dljs.boards[0];
+                } else {
+                    dljs.el = null;
+                }
+            }
+        }
+        
     };
 
   /* ----- */
