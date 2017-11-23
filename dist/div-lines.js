@@ -9,13 +9,16 @@
  
 (function() {
 
-  window.dljs = {
-    "el": null,
-    "pointer":{
-      x:0,
-      y:0
-    }
-  };
+    "use strict";
+
+    window.dljs = {
+      "el": null,
+      "boards":[],
+      "pointer":{
+        x:0,
+        y:0
+      }
+    };
 
   /*
 
@@ -45,11 +48,16 @@
     if (!el){
 
       // create
+
+      /*
       var strId = "dljs-"+ Date.now();
       this.el = document.createElement('ul');
       this.el.setAttribute("id", strId );
       this.el.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
       document.body.appendChild(this.el);
+      */
+
+      this.createBoard();
 
     } else {
 
@@ -101,6 +109,137 @@
     this.line(x1,y1,x2,y2,thickness,color);
   };
 
+  dljs.rmLine = function(lineID){ // Remove line
+
+  };
+
+  dljs.updateLine = function(id, propsArr ){
+
+  };
+
+  dljs.trace = function(arr){
+
+  };
+
+    /* ------ */
+    /* Boards */
+    /* ------ */
+
+    dljs.createBoard = function( boardID, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
+
+        // (1) name of the new board
+        if ( boardID === undefined || boardID === null ) boardID = "dljs-"+ Date.now();
+
+        // (2) set board properties
+
+        if ( objOptions != null ) {
+
+            // Overwrite default board values
+
+        } else {
+
+            var brd = document.createElement('ul');
+            brd.setAttribute("id", boardID );
+
+            // Create a board setting default values
+            brd.setAttribute("style", "position: absolute; top: 0; left: 0; width: 0; height: 0; background-color: transparent; display: inline-block; margin: 0; padding: 0; list-style: none;");
+        }
+
+        // (3) add board to arr of boards
+        dljs.boards.push( brd );
+
+        // (4) Atach board to DOM
+        document.body.appendChild( brd );
+
+        // (5) Set this new board as the active one
+        //this.el = [ dljs.boards[ dljs.boards.length -1 ] ];
+        this.el = brd;
+
+        return brd
+    };
+
+    dljs.getBoards = function() {
+        return dljs.boards
+    };
+
+    dljs.setBoard = function( boardID ) {
+        if ( boardID === undefined || boardID === null ) {
+            this.el = dljs.boards[0];
+            return this.el
+        } else {
+
+            if( isNaN( boardID ) ){
+
+                for (var i=0; i < dljs.boards.length; i++ ) {
+                    if ( boardID === dljs.boards[i].id ) {
+                        this.el = dljs.boards[i];
+                    } 
+                }
+                return this.el
+
+            } else {
+
+                if ( boardID > dljs.boards.length -1 ) return false
+                this.el = dljs.boards[ boardID ];
+                return this.el
+            }
+        }
+
+        return false
+    };
+
+    dljs.rmBoard = function( boardID ) {
+
+        var selectedID = null;
+        var index = null;
+
+        // Find the element that should be removed
+
+        if( isNaN( boardID ) ){
+            // search board name
+            for (var i=0; i < dljs.boards.length; i++ ) {
+              
+                if ( boardID === dljs.boards[i].id ) {
+                    selectedID = dljs.boards[i].id;
+                    index = i;
+                } 
+            }
+
+        } else {
+
+            if ( boardID > dljs.boards.length -1 ) return false
+            selectedID = dljs.boards[ boardID ].id;
+            index = boardID;
+        }
+
+        // Remove element from html and references in variables 
+
+        if ( selectedID != null ) {
+
+            var node = document.getElementById( selectedID );
+            if (node.parentNode) {
+                
+                // remove html
+                node.parentNode.removeChild(node);
+
+                // remove from the array of boards or the element will remain in memory
+                dljs.boards.splice( index, 1 )
+                
+                // remove from dljs.el or the element will remain in memory
+                if ( dljs.boards.length != 0 ){
+                    dljs.el = dljs.boards[0];
+                } else {
+                    dljs.el = null;
+                }
+            }
+        }
+        
+    };
+
+  /* ----- */
+  /* Utils */
+  /* ----- */
+
   dljs.utils = {};
 
   dljs.utils.getDistance = function(x1,y1,x2,y2){
@@ -109,22 +248,6 @@
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
     return (y2-y1)/(x2-x1)
-  };
-
-  dljs.rm = function(lineID){ // Remove line
-
-  };
-
-  dljs.update = function(id, propsArr ){
-
-  };
-
-  dljs.trace = function(arr){
-
-  };
-
-  dljs.createContext = function() {
-
   };
 
   dljs.utils.getRandomNum = function(min, max) {
@@ -147,6 +270,12 @@
       return this.getRandomNum(1, window.innerHeight );
   };
 
+  /* -------------- */
+  /* Core functions */
+  /* -------------- */
+
+  dljs.CONST_180_BY_PI = 180 / Math.PI;
+
   // This function returns an html string
   dljs.getLineString = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){
 
@@ -165,8 +294,6 @@
 
       return string;
   };
-
-  dljs.CONST_180_BY_PI = 180 / Math.PI;
 
   dljs.getFastLineString = function (x1,y1,x2,y2,weight,color){
 
