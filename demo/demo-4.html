@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+    <head>
+        <title>div-lines.js</title>
+        <style type="text/css">
+
+            body {
+                overflow: hidden;
+                //background-image: url("bg-005.gif");
+            }
+
+            .box {
+                width: 50%;
+                height: 50%;
+                border: 1px solid red;
+                position: absolute;
+                overflow: hidden;
+                background-image: url("bg-005.gif");
+            }
+
+            .box1{
+                top: 0;
+                left: 0;
+            }
+
+            .box2 {
+                top: 0;
+                left: 50%;
+            }
+
+            .box3 {
+                top: 50%;
+                left: 0;
+            }
+
+            .box4 {
+                top: 50%;
+                left: 50%;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="mainContainer" class="mainContainer">
+            <div id="line" class="line extra"></div>
+        </div>
+        <!-- <script src="../dist/div-lines.min.js"></script> -->
+        <script src="../src/div-lines.js"></script>
+
+        <div id="box1" class="box box1"></div>
+        <div id="box2" class="box box2"></div>
+        <div id="box3" class="box box3"></div>
+        <div id="box4" class="box box4"></div>
+        
+        <script>
+
+            // board 1
+
+            dljs.createBoard("board-inside-box-1","box1", null);
+
+            var u = dljs.utils;
+            for (var i = 0; i < 100; i++) dljs.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), u.getRandomNum(1,10), u.rndColor() );
+
+
+            // board 2
+
+            dljs.createBoard("board-inside-box-1","box2", null);
+
+            var u = dljs.utils;
+            for (var i = 0; i < 100; i++) dljs.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 2, "#000" );
+
+
+            // board 3
+
+            dljs.createBoard("board-inside-box-1","box3", null);
+
+            var u = dljs.utils;
+            for (var i = 0; i < 50; i++) dljs.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 20, "rgba(255,0,0,0.4)" );
+
+            
+            // board 4
+
+            dljs.createBoard("board-inside-box-1","box4", null);
+
+            var u = dljs.utils;
+            for (var i = 0; i < 25; i++) dljs.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 40, "rgba(0,255,0,0.4)" );
+
+        </script>
+
+    </body>
+</html>
