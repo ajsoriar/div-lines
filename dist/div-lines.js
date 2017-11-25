@@ -125,7 +125,7 @@
     /* Boards */
     /* ------ */
 
-    dljs.createBoard = function( boardID, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
+    dljs.createBoard = function( boardID, targetEl, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
 
         // (1) name of the new board
         if ( boardID === undefined || boardID === null ) boardID = "dljs-"+ Date.now();
@@ -149,8 +149,16 @@
         dljs.boards.push( brd );
 
         // (4) Atach board to DOM
-        document.body.appendChild( brd );
+        if ( targetEl != null ){
+            
+            var el = document.getElementById( targetEl )
+            el .appendChild( brd );
 
+        } else {
+
+            document.body.appendChild( brd );
+        }
+        
         // (5) Set this new board as the active one
         //this.el = [ dljs.boards[ dljs.boards.length -1 ] ];
         this.el = brd;
