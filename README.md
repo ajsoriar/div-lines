@@ -1,7 +1,6 @@
 # div-lines [![Build Status](https://travis-ci.org/ajsoriar/div-lines.svg?branch=master)](https://travis-ci.org/ajsoriar/div-lines)
 
 [![npm version](https://badge.fury.io/js/div-lines.svg)](https://badge.fury.io/js/div-lines)
-[![Bower version](https://badge.fury.io/bo/div-lines.svg)](https://badge.fury.io/bo/div-lines)
 [![NuGet version](https://badge.fury.io/nu/div-lines.svg)](https://badge.fury.io/nu/div-lines)
 
 Small and simple utility library to draw lines just using javascript and HTML Document Object Model.
@@ -10,11 +9,10 @@ Small and simple utility library to draw lines just using javascript and HTML Do
 
 This example in plunker: http://embed.plnkr.co/Nipx831rhNMFnTiVUWTN/
 
-## Quick start. 
+## Quick start.
 
 #### 1 Download and Install div-lines:
 
- - Bower: **bower install div-lines**
  - NPM: **npm install div-lines**
  - NuGet: **PM> Install-Package div-lines**
  - github: **https://github.com/ajsoriar/div-lines**
