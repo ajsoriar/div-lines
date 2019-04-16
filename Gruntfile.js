@@ -34,28 +34,43 @@ module.exports = function(grunt) {
                 files: {
                     'dist/div-lines.min.js': ['dist/div-lines.js']
                 }
+            },
+        },
+        remove_comments: {
+            js: {
+                options: {
+                    multiline: true,
+                    singleline: true,
+                    keepSpecialComments: false
+                },
+                cwd: 'dist',
+                src: 'div-lines.js',
+                expand: true,
+                dest: 'dist'
             }
         },
-        karma: {
-            unit: {
-                configFile: 'tests/karma.conf.js',
-                singleRun: true
-            }
-        }
+        concat: {
+            options: {
+              //separator: ';',
+            },
+            dist: {
+              src: ['src/header.txt', 'dist/div-lines.js'],
+              dest: 'dist/div-lines.js',
+            },
+          },
 
     });
 
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-remove-comments');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     grunt.registerTask( 
         'build',
         'Compiles all of the assets and files to dist directory.',
-        //['clean', 'compass', 'copy', 'uglify', 'cssmin']
-        ['clean', 'copy', 'uglify']
+        ['clean', 'copy', 'remove_comments:js', 'concat', 'uglify' ]
     );
 
-    grunt.registerTask('test', ['karma']);
 };

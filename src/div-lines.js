@@ -1,12 +1,3 @@
-/**
- * div-lines
- * Small and simple utility library to draw lines just using javascript and HTML Document Object Model. No JQuery needed.
- * @version v1.2.0 - 2017-11-18
- * @link https://github.com/ajsoriar/div-lines
- * @author Andres J. Soria R. <ajsoriar@gmail.com>
- * @license MIT License, http://www.opensource.org/licenses/MIT
- */
- 
 (function() {
 
     "use strict";
@@ -64,7 +55,7 @@
       this.el = document.getElementById( el );
     }
 
-    return this
+    return this;
   };
 
   dljs.line = function (x1,y1,x2,y2,thickness,color) {
@@ -75,7 +66,7 @@
     var new_content = dljs.getLineString(null,x1,y1,x2,y2, thickness, color, 1, false, 0, null);
     this.draw( new_content );
     this.goTo(x2,y2);
-    return this.el.lastElementChild
+    return this.el.lastElementChild;
   };
 
   dljs.linex = function (idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra){ // extended functionality
@@ -85,13 +76,13 @@
     var new_content = dljs.getLineString(idString,x1,y1,x2,y2,weight,color,opacity, roundBorder, longSombra, colSombra);
     this.draw( new_content );
     this.goTo(x2,y2);
-    return this.el.lastElementChild
+    return this.el.lastElementChild;
   };
 
   dljs.rndLine = function(){
     var u = this.utils;
     this.line( u.rndX(), u.rndY(), u.rndX(), u.rndY(), 1,  u.rndColor() );
-    return this.el.lastElementChild
+    return this.el.lastElementChild;
   };
 
   dljs.draw = function(html){ // Draw html content
@@ -127,6 +118,8 @@
 
     dljs.createBoard = function( boardID, targetEl, objOptions ) { // A board is the place ( <ul> element ) where the lines ( <li> elements ) are created.
 
+        var brd = null; 
+
         // (1) name of the new board
         if ( boardID === undefined || boardID === null ) boardID = "dljs-"+ Date.now();
 
@@ -138,7 +131,7 @@
 
         } else {
 
-            var brd = document.createElement('ul');
+            brd = document.createElement('ul');
             brd.setAttribute("id", boardID );
 
             // Create a board setting default values
@@ -151,7 +144,7 @@
         // (4) Atach board to DOM
         if ( targetEl != null ){
             
-            var el = document.getElementById( targetEl )
+            var el = document.getElementById( targetEl );
             el .appendChild( brd );
 
         } else {
@@ -163,17 +156,17 @@
         //this.el = [ dljs.boards[ dljs.boards.length -1 ] ];
         this.el = brd;
 
-        return brd
+        return brd;
     };
 
     dljs.getBoards = function() {
-        return dljs.boards
+        return dljs.boards;
     };
 
     dljs.setBoard = function( boardID ) {
         if ( boardID === undefined || boardID === null ) {
             this.el = dljs.boards[0];
-            return this.el
+            return this.el;
         } else {
 
             if( isNaN( boardID ) ){
@@ -183,17 +176,15 @@
                         this.el = dljs.boards[i];
                     } 
                 }
-                return this.el
+                return this.el;
 
             } else {
 
-                if ( boardID > dljs.boards.length -1 ) return false
+                if ( boardID > dljs.boards.length -1 ) return false;
                 this.el = dljs.boards[ boardID ];
-                return this.el
+                return this.el;
             }
         }
-
-        return false
     };
 
     dljs.rmBoard = function( boardID ) {
@@ -215,7 +206,7 @@
 
         } else {
 
-            if ( boardID > dljs.boards.length -1 ) return false
+            if ( boardID > dljs.boards.length -1 ) return false;
             selectedID = dljs.boards[ boardID ].id;
             index = boardID;
         }
@@ -231,7 +222,7 @@
                 node.parentNode.removeChild(node);
 
                 // remove from the array of boards or the element will remain in memory
-                dljs.boards.splice( index, 1 )
+                dljs.boards.splice( index, 1 );
                 
                 // remove from dljs.el or the element will remain in memory
                 if ( dljs.boards.length != 0 ){
@@ -251,11 +242,11 @@
   dljs.utils = {};
 
   dljs.utils.getDistance = function(x1,y1,x2,y2){
-    return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) )
+    return Math.sqrt( Math.pow( x2 - x1, 2 ) + Math.pow( y2 - y1, 2 ) );
   };
 
   dljs.utils.getSlope = function(x1,y1,x2,y2){
-    return (y2-y1)/(x2-x1)
+    return (y2-y1)/(x2-x1);
   };
 
   dljs.utils.getRandomNum = function(min, max) {
@@ -290,15 +281,33 @@
       if (x2 < x1){ var aux = x1; x1 = x2; x2 = aux; aux = y1; y1 = y2; y2 = aux; }
 
       if ( idString === null ) idString = "line-"+ Date.now();
-      var cathetus1 = x2-x1;
-      var cathetus2 = y2-y1;
-      var hypotenuse = Math.sqrt(cathetus1*cathetus1+cathetus2*cathetus2);
-      var w=hypotenuse + weight;
-      var angRadians = Math.asin(cathetus2/hypotenuse);
-      var ang = angRadians * 180 / Math.PI;
+      var cathetus1 = x2-x1,
+          cathetus2 = y2-y1,
+          hypotenuse = Math.sqrt(cathetus1*cathetus1+cathetus2*cathetus2),
+          w=hypotenuse + weight,
+          angRadians = Math.asin(cathetus2/hypotenuse),
+          ang = (angRadians * 180 / Math.PI );
 
       //var string = '<div id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></div>';
-      var string = '<li id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></li>';
+      var string = ''+
+      '<li id="'+ idString +'" class="line" '+
+        'style="'+
+          'top:'+y1+'px;'+
+          'left:'+x1+'px; '+
+          'width:'+w+'px; '+
+          'height:'+weight+'px; '+
+          'transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); '+
+          '-webkit-transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); '+
+          '-o-transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); '+
+          'background-color: '+color+'; '+
+          'opacity:'+opacity+'; '+
+          'border-radius: '+weight+'px; '+
+          'box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; '+
+          'transform-origin: 0 0; '+
+          '-webkit-transform-origin: 0 0; '+
+          '-o-transform-origin: 0 0; '+
+          'position: absolute;">'+
+      '</li>';
 
       return string;
   };
@@ -307,15 +316,25 @@
 
       if (x2 < x1){ var aux = x1; x1 = x2; x2 = aux; aux = y1; y1 = y2; y2 = aux; }
 
-      var cathetus1 = x2-x1
+      var cathetus1 = x2-x1,
           cathetus2 = y2-y1,
           hypotenuse = Math.sqrt(cathetus1*cathetus1+cathetus2*cathetus2),
           w = hypotenuse + weight,
           angRadians = Math.asin(cathetus2/hypotenuse),
-          ang = angRadians * dljs.CONST_180_BY_PI;
+          ang = (angRadians * dljs.CONST_180_BY_PI );
 
       //var string = '<div id="'+ idString +'" class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+'; opacity:'+opacity+'; border-radius: '+weight+'px; box-shadow: 0 0 '+ longSombra +'px '+ colSombra +'; transform-origin: 0 0;position: absolute;"></div>';
-      var string = '<li class="line" style="top:'+y1+'px;left:'+x1+'px; width:'+w+'px; height:'+weight+'px; transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px); background-color: '+color+';"></li>';
+      var string = '<li class="line" '+
+        'style="'+
+          'top:'+y1+'px;'+
+          'left:'+x1+'px;'+
+          'width:'+w+'px;'+
+          'height:'+weight+'px;'+
+          'transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px);'+
+          '-webkit-transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px);'+
+          '-o-transform: rotateZ('+ang+'deg) translateX(-'+weight/2+'px) translateY(-'+weight/2+'px);'+
+          'background-color: '+color+';">'+
+      '</li>';
 
       return string;
   };
