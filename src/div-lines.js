@@ -112,6 +112,10 @@
 
   };
 
+  dljs.clear = function(){ // Removes all lines
+    if (this.el) this.el.innerHTML = '';
+  };
+
     /* ------ */
     /* Boards */
     /* ------ */
